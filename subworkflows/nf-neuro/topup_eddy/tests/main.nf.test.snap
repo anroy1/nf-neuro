@@ -7,7 +7,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__b0_bet_mask.nii.gz:md5,fc1f94e2a5e2cf5197d7fdc28a83ca28"
+                    "test__b0_bet_mask.nii.gz:md5,3574cc8f29da429a0f610f2572c4886c"
                 ]
             ],
             [
@@ -21,7 +21,6 @@
             ],
             [
                 "versions.yml:md5,1210f8705c10f136e83e5f07c0d77b70",
-                "versions.yml:md5,3e57e2f1a94bbabf9be75f50b4cbcdb0",
                 "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
             ],
             "test__dwi_corrected.nii.gz",
@@ -29,10 +28,10 @@
             "test_b0.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.2"
         },
-        "timestamp": "2024-05-09T00:17:01.349981"
+        "timestamp": "2024-06-22T14:40:30.486384"
     },
     "eddy": {
         "content": [
@@ -76,7 +75,7 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__b0_bet_mask.nii.gz:md5,fc1f94e2a5e2cf5197d7fdc28a83ca28"
+                    "test__b0_bet_mask.nii.gz:md5,3574cc8f29da429a0f610f2572c4886c"
                 ]
             ],
             [
@@ -85,12 +84,11 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test__bval_eddy:md5,4c61c53078316c31b4d5daf446a3d6ac"
+                    "test__bval_eddy:md5,8192e97b08e8032382397bb844b31892"
                 ]
             ],
             [
                 "versions.yml:md5,1210f8705c10f136e83e5f07c0d77b70",
-                "versions.yml:md5,3e57e2f1a94bbabf9be75f50b4cbcdb0",
                 "versions.yml:md5,dc9478b4d3cb93d93799e493aefe5220"
             ],
             "test__dwi_corrected.nii.gz",
@@ -98,9 +96,9 @@
             "test_b0.nii.gz"
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
+            "nf-test": "0.9.0-rc1",
+            "nextflow": "24.04.2"
         },
-        "timestamp": "2024-05-09T00:19:03.319712"
+        "timestamp": "2024-06-24T05:02:10.817762"
     }
 }
