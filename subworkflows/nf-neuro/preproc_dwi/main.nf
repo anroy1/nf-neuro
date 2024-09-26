@@ -14,10 +14,10 @@ include { TOPUP_EDDY } from '../topup_eddy/main'
 workflow PREPROC_DWI {
 
     take:
-        ch_dwi           // channel: [ val(meta), [ dwi, bval, bvec ] ]
-        ch_rev_dwi       // channel: [ val(meta), [ rev_dwi, bval, bvec ] ], optional
-        ch_b0            // Channel: [ val(meta), [ b0 ] ], optional
-        ch_rev_b0        // channel: [ val(meta), [ reverse b0 ] ], optional
+        ch_dwi           // channel: [ val(meta), dwi, bval, bvec ]
+        ch_rev_dwi       // channel: [ val(meta), rev_dwi, bval, bvec ], optional
+        ch_b0            // Channel: [ val(meta), b0 ], optional
+        ch_rev_b0        // channel: [ val(meta), reverse b0 ], optional
         ch_config_topup  // channel: [ 'config_topup' ], optional
 
     main:
@@ -31,44 +31,24 @@ workflow PREPROC_DWI {
             }
 
         // ** Denoised DWI ** //
-        DENOISE_DWI (
-            ch_denoise_dwi.dwi
-                .map{ it + [[]] }
-        )
+        DENOISE_DWI ( ch_denoise_dwi.dwi.map{ it + [[]] } )
         ch_versions = ch_versions.mix(DENOISE_DWI.out.versions.first())
 
-        if ( ch_rev_dwi )
-        {
-            ch_denoise_rev_dwi = ch_rev_dwi
-                .multiMap { meta, dwi, bval, bvec ->
-                    rev_dwi:    [ [id: "${meta.id}_rev", cache: meta], dwi ]
-                    rev_bvs_files: [ meta, bval, bvec ]
-                }
-            // ** Denoised reverse DWI ** //
-            DENOISE_REVDWI (
-                ch_denoise_rev_dwi.rev_dwi
-                    .map{ it + [[]] }
-            )
-            ch_versions = ch_versions.mix(DENOISE_REVDWI.out.versions.first())
+        ch_denoise_rev_dwi = ch_rev_dwi
+            .multiMap { meta, dwi, bval, bvec ->
+                rev_dwi:    [ [id: "${meta.id}_rev", cache: meta], dwi ]
+                rev_bvs_files: [ meta, bval, bvec ]
+            }
+        // ** Denoised reverse DWI ** //
+        DENOISE_REVDWI ( ch_denoise_rev_dwi.rev_dwi.map{ it + [[]] } )
+        ch_versions = ch_versions.mix(DENOISE_REVDWI.out.versions.first())
 
-            ch_topup_eddy_rev_dwi = DENOISE_REVDWI.out.image
-                .map{ meta, dwi -> [ meta.cache, dwi ] }
-                .join(ch_denoise_rev_dwi.rev_bvs_files)
-        }
-        else
-        {
-            ch_topup_eddy_rev_dwi = []    // or Channel.empty()
-        }
+        ch_topup_eddy_rev_dwi = DENOISE_REVDWI.out.image
+            .map{ meta, dwi -> [ meta.cache, dwi ] }
+            .join(ch_denoise_rev_dwi.rev_bvs_files)
 
         // ** Eddy Topup ** //
         ch_topup_eddy_dwi = DENOISE_DWI.out.image.join(ch_denoise_dwi.bvs_files)
-
-        if ( ! ch_b0 ) {
-            EXTRACTB0_TOPUP { ch_topup_eddy_dwi }
-            ch_versions = ch_versions.mix(EXTRACTB0_TOPUP.out.versions.first())
-            ch_b0 = EXTRACTB0_TOPUP.out.b0
-        }
-
         TOPUP_EDDY ( ch_topup_eddy_dwi, ch_b0, ch_topup_eddy_rev_dwi, ch_rev_b0, ch_config_topup )
         ch_versions = ch_versions.mix(TOPUP_EDDY.out.versions.first())
 
