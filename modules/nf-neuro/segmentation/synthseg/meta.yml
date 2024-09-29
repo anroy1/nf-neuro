@@ -56,9 +56,9 @@ output:
       description: Nifti CSF mask volume.
       pattern: "*.{nii,nii.gz}"
 
-  - gm_parc:
+  - aparc_aseg:
       type: file
-      description: (optional) Nifti cortical parcellation volume.
+      description: (optional) Nifti cortical parcellation volume with anatomical segmentation.
       pattern: "*.{nii,nii.gz}"
 
   - volume:

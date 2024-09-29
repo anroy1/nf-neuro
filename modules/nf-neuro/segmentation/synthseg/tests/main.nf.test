@@ -106,7 +106,7 @@ nextflow_process {
                     file(process.out.wm_mask.get(0).get(1)).name,
                     file(process.out.gm_mask.get(0).get(1)).name,
                     file(process.out.csf_mask.get(0).get(1)).name,
-                    file(process.out.gm_parc.get(0).get(1)).name,
+                    file(process.out.aparc_aseg.get(0).get(1)).name,
                     niftiMD5SUM(process.out.resample.get(0).get(1)),
                     process.out.volume,
                     process.out.qc_score,
