@@ -42,7 +42,7 @@ process SEGMENTATION_SYNTHSEG {
 
     cp $fs_license \$FREESURFER_HOME/license.txt
 
-    mri_synthseg --i $image --o seg.nii.gz --threads $task.cpus $gpu $robust $fast $ct $output_resample $output_volume $output_qc_score $crop
+    mri_synthseg --i $image --o seg.nii.gz --threads $task.cpus $gpu $robust $fast $ct $gm_parc $output_resample $output_volume $output_qc_score $crop
 
     if [[ -n "$gm_parc" ]];
     then
