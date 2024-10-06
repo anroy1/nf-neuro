@@ -1,6 +1,7 @@
 // ** Importing modules from nf-neuro ** //
 include { SEGMENTATION_FASTSEG       } from '../../../modules/nf-neuro/segmentation/fastseg/main'
 include { SEGMENTATION_FREESURFERSEG } from '../../../modules/nf-neuro/segmentation/freesurferseg/main'
+include { SEGMENTATION_SYNTHSEG      } from '../../../modules/nf-neuro/segmentation/synthseg/main'
 
 workflow ANATOMICAL_SEGMENTATION {
 
@@ -10,6 +11,7 @@ workflow ANATOMICAL_SEGMENTATION {
     take:
         ch_image            // channel: [ val(meta), [ image ] ]
         ch_freesurferseg    // channel: [ val(meta), [ aparc_aseg, wmparc ] ]
+        ch_fs_license       // channel: [ val[meta], [ fs_license ] ], optional
 
     main:
 
@@ -21,34 +23,72 @@ workflow ANATOMICAL_SEGMENTATION {
             ch_versions = ch_versions.mix(SEGMENTATION_FREESURFERSEG.out.versions.first())
 
             // ** Setting outputs ** //
+            seg = Channel.empty()
             wm_mask = SEGMENTATION_FREESURFERSEG.out.wm_mask
             gm_mask = SEGMENTATION_FREESURFERSEG.out.gm_mask
             csf_mask = SEGMENTATION_FREESURFERSEG.out.csf_mask
             wm_map = Channel.empty()
             gm_map = Channel.empty()
             csf_map = Channel.empty()
+            gm_parc = Channel.empty()
+            resample = Channel.empty()
+            volume = Channel.empty()
+            qc_score = Channel.empty()
         }
-        else {
-            // ** FSL fast segmentation ** //
-            SEGMENTATION_FASTSEG ( ch_image )
-            ch_versions = ch_versions.mix(SEGMENTATION_FASTSEG.out.versions.first())
 
-            // ** Setting outputs ** //
-            wm_mask = SEGMENTATION_FASTSEG.out.wm_mask
-            gm_mask = SEGMENTATION_FASTSEG.out.gm_mask
-            csf_mask = SEGMENTATION_FASTSEG.out.csf_mask
-            wm_map = SEGMENTATION_FASTSEG.out.wm_map
-            gm_map = SEGMENTATION_FASTSEG.out.gm_map
-            csf_map = SEGMENTATION_FASTSEG.out.csf_map
+        else {
+            if ( params.run_synthseg ) {
+                // ** Freesurfer synthseg segmentation ** //
+                ch_synthseg = ch_image.join(ch_fs_license)
+                SEGMENTATION_SYNTHSEG ( ch_synthseg )
+                ch_versions = ch_versions.mix(SEGMENTATION_SYNTHSEG.out.versions.first())
+
+                // ** Setting outputs ** //
+                seg = SEGMENTATION_SYNTHSEG.out.seg
+                wm_mask = SEGMENTATION_SYNTHSEG.out.wm_mask
+                gm_mask = SEGMENTATION_SYNTHSEG.out.gm_mask
+                csf_mask = SEGMENTATION_SYNTHSEG.out.csf_mask
+                wm_map = Channel.empty()
+                gm_map = Channel.empty()
+                csf_map = Channel.empty()
+                gm_parc = SEGMENTATION_SYNTHSEG.out.gm_parc
+                resample = SEGMENTATION_SYNTHSEG.out.resample
+                volume = SEGMENTATION_SYNTHSEG.out.volume
+                qc_score = SEGMENTATION_SYNTHSEG.out.qc_score
+            }
+
+            else {
+                // ** FSL fast segmentation ** //
+                SEGMENTATION_FASTSEG ( ch_image )
+                ch_versions = ch_versions.mix(SEGMENTATION_FASTSEG.out.versions.first())
+
+                // ** Setting outputs ** //
+                seg = Channel.empty()
+                wm_mask = SEGMENTATION_FASTSEG.out.wm_mask
+                gm_mask = SEGMENTATION_FASTSEG.out.gm_mask
+                csf_mask = SEGMENTATION_FASTSEG.out.csf_mask
+                wm_map = SEGMENTATION_FASTSEG.out.wm_map
+                gm_map = SEGMENTATION_FASTSEG.out.gm_map
+                csf_map = SEGMENTATION_FASTSEG.out.csf_map
+                gm_parc = Channel.empty()
+                resample = Channel.empty()
+                volume = Channel.empty()
+                qc_score = Channel.empty()
+            }
         }
 
     emit:
+        seg       = seg                         // channel: [ val(meta), [ seg ] ]
         wm_mask   = wm_mask                     // channel: [ val(meta), [ wm_mask ] ]
         gm_mask   = gm_mask                     // channel: [ val(meta), [ gm_mask ] ]
         csf_mask  = csf_mask                    // channel: [ val(meta), [ csf_mask ] ]
         wm_map    = wm_map                      // channel: [ val(meta), [ wm_map ] ]
         gm_map    = gm_map                      // channel: [ val(meta), [ gm_map ] ]
         csf_map   = csf_map                     // channel: [ val(meta), [ csf_map ] ]
+        gm_parc   = gm_parc                     // channel: [ val(meta), [ gm_parc ] ]
+        resample  = resample                    // channel: [ val(meta), [ resample ] ]
+        volume    = volume                      // channel: [ val(meta), [ volume ] ]
+        qc_score  = qc_score                    // channel: [ val(meta), [ qc_score ] ]
 
         versions = ch_versions                  // channel: [ versions.yml ]
 }
