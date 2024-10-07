@@ -1,0 +1,2 @@
+io/dicom2bids:
+  - "modules/nf-neuro/io/dicom2bids/**"
