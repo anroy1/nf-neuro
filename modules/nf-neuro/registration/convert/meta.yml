@@ -21,7 +21,7 @@ input:
 
   - affine:
       type: file
-      description: Affine transform to convert. Default usage expects Freesurfer .lta format from mri_synthmorph
+      description: Optional affine transform to convert. Default usage expects Freesurfer .lta format from mri_synthmorph
       pattern: "*.{lta,txt,xfm,dat}"
 
   - deform:
