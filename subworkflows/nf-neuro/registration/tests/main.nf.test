@@ -13,6 +13,7 @@ nextflow_workflow {
     tag "registration"
     tag "registration/ants"
     tag "registration/easyreg"
+    tag "regitration/synthmorph"
 
     tag "load_test_data"
 
