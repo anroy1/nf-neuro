@@ -110,6 +110,20 @@
         },
         "timestamp": "2024-10-25T09:25:14.344251"
     },
+    "registration - synthmorph": {
+        "content": [
+            "test__output_warped.nii.gz:md5:header,6900f7dee20cda3a0b1f6bceca3c95ec,data,53c5f1c2329090cd13384fad0fab3a97",
+            "test__deform_warp.nii.gz:md5:header,a8883dd1ac66bece29c4c89068c97d65,data,062d2e220a3b2d21fbaa67d2e2dd5cf3",
+            [
+                "versions.yml:md5,ba070bfc14176dce912fcc24ed19d2cb"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-10-16T01:38:55.283386298"
+    },
     "registration - SyNQuick": {
         "content": [
             {
