@@ -47,6 +47,11 @@
         {
             "target": "/root/.vscode-server",
             "type": "volume"
+        },
+        {
+            "source": "/home/localrescue/p/nf-tractoflow",
+            "target": "/workspaces/nf-tractoflow",
+            "type": "bind"
         }
     ],
     "customizations": {
