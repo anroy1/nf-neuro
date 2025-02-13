@@ -42,10 +42,25 @@ output:
       description: Warped image
       pattern: "*.{nii,.nii.gz}"
 
-  - transfo_image:
-      type: list
-      description: Tuple, Transformation files to warp images (nii.gz warp, lta file)
-      pattern: "*.{nii,nii.gz,lta}"
+  - warp:
+      type: file
+      description: Transformation file containing the warp transform (moving to fixed). Include the affine initialization.
+      pattern: "*.{nii,nii.gz}"
+
+  - affine:
+      type: file
+      description: Transformation file containing the affine transform (moving to fixed).
+      pattern: "*.{lta}"
+
+  - inverse_warp:
+      type: file
+      description: Transformation file containing the warp inverse transform (fixed to moving). Include the affine initialization
+      pattern: "*.{nii,nii.gz}"
+
+  - inverse_affine:
+      type: file
+      description: Transformation file containing the affine transform (fixed to moving).
+      pattern: "*.{lta}"
 
   - versions:
       type: file

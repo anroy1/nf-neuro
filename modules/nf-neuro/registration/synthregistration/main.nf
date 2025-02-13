@@ -14,6 +14,8 @@ process REGISTRATION_SYNTHREGISTRATION {
     tuple val(meta), path("*__output_warped.nii.gz")        , emit: warped_image
     tuple val(meta), path("*__deform_warp.nii.gz")          , emit: warp
     tuple val(meta), path("*__affine_warp.lta")             , emit: affine
+    tuple val(meta), path("*__inverse_deform_warp.nii.gz")  , emit: inverse_warp
+    tuple val(meta), path("*__inverse_affine_warp.lta")     , emit: inverse_affine
     path "versions.yml"                                     , emit: versions
 
     when:
@@ -24,7 +26,6 @@ process REGISTRATION_SYNTHREGISTRATION {
 
     def affine = task.ext.affine ? "-m " + task.ext.affine : "-m affine"
     def warp = task.ext.warp ? "-m " + task.ext.warp : "-m deform"
-    def header = task.ext.header ? "-H" : ""
     def gpu = task.ext.gpu ? "-g" : ""
     def lambda = task.ext.lambda ? "-r " + task.ext.lambda : ""
     def steps = task.ext.steps ? "-n " + task.ext.steps : ""
@@ -35,8 +36,9 @@ process REGISTRATION_SYNTHREGISTRATION {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
     export OPENBLAS_NUM_THREADS=1
-    mri_synthmorph -j $task.cpus ${affine} -t ${prefix}__affine_warp.lta $moving $fixed
-    mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} -i ${prefix}__affine_warp.lta  -t ${prefix}__deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
+
+    mri_synthmorph -j $task.cpus ${affine} -t ${prefix}__affine_warp.lta -T ${prefix}__inverse_affine_warp.lta $moving $fixed
+    mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} -i ${prefix}__affine_warp.lta  -t ${prefix}__deform_warp.nii.gz -T ${prefix}__inverse_deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
