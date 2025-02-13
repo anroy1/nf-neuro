@@ -55,6 +55,8 @@ process REGISTRATION_SYNTHREGISTRATION {
     touch ${prefix}__output_warped.nii.gz
     touch ${prefix}__deform_warp.nii.gz
     touch ${prefix}__affine_warp.lta
+    touch ${prefix}__inverse_deform_warp.nii.gz
+    touch ${prefix}__inverse_affine_warp.lta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

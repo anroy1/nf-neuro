@@ -68,7 +68,8 @@ workflow REGISTRATION {
             image_warped = REGISTRATION_SYNTHREGISTRATION.out.warped_image
             transfo_image = REGISTRATION_SYNTHREGISTRATION.out.warp
                 .join(REGISTRATION_SYNTHREGISTRATION.out.affine)        // FIXME : this is .lta, should be .mat, but we need a custom container for that
-            transfo_trk = Channel.empty()       // FIXME : this transformation should be available
+            transfo_trk = REGISTRATION_SYNTHREGISTRATION.out.inverse_affine
+                .join(REGISTRATION_SYNTHREGISTRATION.out.inverse_warp)     // FIXME : this transformation should be available
             ref_warped = Channel.empty()
             out_segmentation = Channel.empty()
             out_ref_segmentation = Channel.empty()
