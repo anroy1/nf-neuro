@@ -31,6 +31,7 @@ process REGISTRATION_SYNTHREGISTRATION {
     def steps = task.ext.steps ? "-n " + task.ext.steps : ""
     def extent = task.ext.extent ? "-e " + task.ext.extent : ""
     def weight = task.ext.weight ? "-w " + task.ext.weight : ""
+    def joint = task.ext.joint ? "-M" : ""
 
     """
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
@@ -38,7 +39,7 @@ process REGISTRATION_SYNTHREGISTRATION {
     export OPENBLAS_NUM_THREADS=1
 
     mri_synthmorph -j $task.cpus ${affine} -t ${prefix}__affine_warp.lta -T ${prefix}__inverse_affine_warp.lta $moving $fixed
-    mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} -i ${prefix}__affine_warp.lta  -t ${prefix}__deform_warp.nii.gz -T ${prefix}__inverse_deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
+    mri_synthmorph -j $task.cpus ${warp} ${gpu} ${lambda} ${steps} ${extent} ${weight} ${joint} -i ${prefix}__affine_warp.lta  -t ${prefix}__deform_warp.nii.gz -T ${prefix}__inverse_deform_warp.nii.gz -o ${prefix}__output_warped.nii.gz $moving $fixed
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
