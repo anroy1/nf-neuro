@@ -3,7 +3,7 @@ nextflow_workflow {
     name "Test Subworkflow BUNDLE_SEG"
     script "../main.nf"
     workflow "BUNDLE_SEG"
-    config "./nextflow.config"
+    config "./nextflow_mni.config"
 
     tag "subworkflows"
     tag "subworkflows_nfcore"

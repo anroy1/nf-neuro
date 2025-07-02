@@ -38,20 +38,20 @@ process REGISTRATION_TRACTOGRAM {
         ext=\${tractogram#*.}
         bname=\$(basename \${tractogram} .\${ext})
 
-        scil_tractogram_apply_transform.py \$tractogram $anat $transfo tmp.trk\
+        scil_tractogram_apply_transform.py \$tractogram $anat $transfo ${prefix}__\${bname}${suffix}.\${ext}\
                         $in_deformation\
                         $inverse\
                         $reverse_operation\
                         $force\
                         $reference
 
-        scil_tractogram_remove_invalid.py tmp.trk ${prefix}__\${bname}${suffix}.\${ext}\
-                        $cut_invalid\
-                        $remove_single_point\
-                        $remove_overlapping_points\
-                        $threshold\
-                        $no_empty\
-                        -f
+        ## scil_tractogram_remove_invalid.py tmp.trk ${prefix}__\${bname}${suffix}.\${ext}\
+        ##                 $cut_invalid\
+        ##                 $remove_single_point\
+        ##                 $remove_overlapping_points\
+        ##                 $threshold\
+        ##                 $no_empty\
+        ##                 -f
     done
 
 

@@ -1,5 +1,6 @@
-include { REGISTRATION_ANTS                 } from '../../../modules/nf-neuro/registration/ants/main'
-include { BUNDLE_RECOGNIZE                  } from '../../../modules/nf-neuro/bundle/recognize/main'
+include { REGISTRATION_ANTS                             } from '../../../modules/nf-neuro/registration/ants/main'
+include { BUNDLE_RECOGNIZE                              } from '../../../modules/nf-neuro/bundle/recognize/main'
+include { REGISTRATION_TRACTOGRAM as BUNDLE_REGISTER    } from '../../../modules/nf-neuro/registration/tractogram/main'
 
 def fetch_bundleseg_atlas(atlasUrl, configUrl, dest) {
 
@@ -86,9 +87,30 @@ workflow BUNDLE_SEG {
         BUNDLE_RECOGNIZE ( ch_recognize_bundle )
         ch_versions = ch_versions.mix(BUNDLE_RECOGNIZE.out.versions.first())
 
+        // ** Register the bundles to MNI space. Set up subject's tractogram as moving image ** //
+        // ** and atlas as fixed image. ** //
+
+        if ( params.bundles_mni ) {
+            ch_register_mni = REGISTRATION_ANTS.out.affine
+                .join(BUNDLE_RECOGNIZE.out.bundles)
+                .join(ch_fa)
+                .combine(atlas_anat)
+                .map{ meta, affine, bundles, fa, atlas ->
+                    return [meta, atlas, affine, bundles, fa, [] ]
+                }
+
+            BUNDLE_REGISTER ( ch_register_mni )
+            ch_versions = ch_versions.mix(BUNDLE_REGISTER.out.versions.first())
+        }
+
+        ch_bundles_mni = BUNDLE_REGISTER.out.warped_tractogram
+
+
+
 
     emit:
         bundles = BUNDLE_RECOGNIZE.out.bundles              // channel: [ val(meta), [ bundles ] ]
+        bundles_mni = ch_bundles_mni                        // channel: [ val(meta), [ warped_tractogram ] ]
 
         versions = ch_versions                              // channel: [ versions.yml ]
 }

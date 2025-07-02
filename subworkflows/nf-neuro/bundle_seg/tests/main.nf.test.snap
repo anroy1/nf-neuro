@@ -9,28 +9,32 @@
                             "single_end": false
                         },
                         [
-                            "test__AF_L_cleaned.trk:md5,b9a6567efffa206202f37c11afea2391",
-                            "test__CC_Fr_2_cleaned.trk:md5,ad18f4415d6d5baae1ec81359ccffecb",
-                            "test__CC_Pr_Po_cleaned.trk:md5,dca763cddc2decfa64baf452cc035b5a",
-                            "test__CG_R_An_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__CG_R_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__FPT_L_Brainstem_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__FPT_L_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__ILF_L_cleaned.trk:md5,00f9f6e33e59bfe8bbe3a5afd18b0f2e",
-                            "test__MCP_cleaned.trk:md5,ed86370180b35e125ae410aa3d520625",
-                            "test__OR_ML_L_cleaned.trk:md5,721b658ed8a4de104c4e7c207d4fe170",
-                            "test__POPT_R_Brainstem_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
-                            "test__POPT_R_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
-                            "test__PYT_L_cleaned.trk:md5,ac9973ef987c34ecee0328004033ea46",
-                            "test__PYT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
+                            "test__CC_Fr_1_cleaned.trk:md5,33541c60c651633f1ae888d02438213c",
+                            "test__CC_Fr_2_cleaned.trk:md5,1aadd5139071a96e22e3fc1889396c03",
+                            "test__CC_Pa_cleaned.trk:md5,8b912390617dadbf9369e2204ea4236a",
+                            "test__CC_Pr_Po_cleaned.trk:md5,a0727333c71a032e0b05510550426c26",
+                            "test__CG_L_An_cleaned.trk:md5,f56a2138afdcfdefc965adbab7d8c139",
+                            "test__FAT_R_cleaned.trk:md5,f3742d21aca6714792ea066711e3270a",
+                            "test__FPT_L_cleaned.trk:md5,6af39bbd85cc396d95c667734c4876e5",
+                            "test__FPT_R_cleaned.trk:md5,58ccb7d401d410bb8b02bb316ca57b2e",
+                            "test__ILF_L_cleaned.trk:md5,10e2a99417d338c5b8761973b7c1a07d",
+                            "test__MCP_cleaned.trk:md5,34f65689c92d2292c406b085762bec64",
+                            "test__POPT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
+                            "test__POPT_R_cleaned.trk:md5,673d46a95df770254589b3e8d66ea17a",
+                            "test__PYT_L_cleaned.trk:md5,6af39bbd85cc396d95c667734c4876e5",
+                            "test__PYT_R_Brainstem_cleaned.trk:md5,f8557a922921c9dcd19a029b523d9c2d",
                             "test__PYT_R_cleaned.trk:md5,50f8127bbaab6f4b9fea790a7c11679d",
-                            "test__SLF_L_cleaned.trk:md5,3660a62ee7e0e413f7417e80c1842e60"
+                            "test__SLF_L_cleaned.trk:md5,189cf493e082cfb4465c72b8e9630bb2",
+                            "test__SLF_R_cleaned.trk:md5,fc4a56c5a2094db9760e4ae41b1ad19d"
                         ]
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,5ab498390fc1f2d08a8bd6ed0f1cd4e4",
-                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030"
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030",
+                    "versions.yml:md5,a18b93eb0edfeaebecfcaf4513b4826c"
                 ],
                 "bundles": [
                     [
@@ -39,35 +43,39 @@
                             "single_end": false
                         },
                         [
-                            "test__AF_L_cleaned.trk:md5,b9a6567efffa206202f37c11afea2391",
-                            "test__CC_Fr_2_cleaned.trk:md5,ad18f4415d6d5baae1ec81359ccffecb",
-                            "test__CC_Pr_Po_cleaned.trk:md5,dca763cddc2decfa64baf452cc035b5a",
-                            "test__CG_R_An_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__CG_R_cleaned.trk:md5,79c5f2469b1fcae2599247ced8d68e07",
-                            "test__FPT_L_Brainstem_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__FPT_L_cleaned.trk:md5,d6c9af62d9ad65d95257093148bf4d9a",
-                            "test__ILF_L_cleaned.trk:md5,00f9f6e33e59bfe8bbe3a5afd18b0f2e",
-                            "test__MCP_cleaned.trk:md5,ed86370180b35e125ae410aa3d520625",
-                            "test__OR_ML_L_cleaned.trk:md5,721b658ed8a4de104c4e7c207d4fe170",
-                            "test__POPT_R_Brainstem_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
-                            "test__POPT_R_cleaned.trk:md5,6c07d476650f4bca894c4c2454a1783f",
-                            "test__PYT_L_cleaned.trk:md5,ac9973ef987c34ecee0328004033ea46",
-                            "test__PYT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
+                            "test__CC_Fr_1_cleaned.trk:md5,33541c60c651633f1ae888d02438213c",
+                            "test__CC_Fr_2_cleaned.trk:md5,1aadd5139071a96e22e3fc1889396c03",
+                            "test__CC_Pa_cleaned.trk:md5,8b912390617dadbf9369e2204ea4236a",
+                            "test__CC_Pr_Po_cleaned.trk:md5,a0727333c71a032e0b05510550426c26",
+                            "test__CG_L_An_cleaned.trk:md5,f56a2138afdcfdefc965adbab7d8c139",
+                            "test__FAT_R_cleaned.trk:md5,f3742d21aca6714792ea066711e3270a",
+                            "test__FPT_L_cleaned.trk:md5,6af39bbd85cc396d95c667734c4876e5",
+                            "test__FPT_R_cleaned.trk:md5,58ccb7d401d410bb8b02bb316ca57b2e",
+                            "test__ILF_L_cleaned.trk:md5,10e2a99417d338c5b8761973b7c1a07d",
+                            "test__MCP_cleaned.trk:md5,34f65689c92d2292c406b085762bec64",
+                            "test__POPT_R_Brainstem_cleaned.trk:md5,28b4be34422e356030b6b081efca31d5",
+                            "test__POPT_R_cleaned.trk:md5,673d46a95df770254589b3e8d66ea17a",
+                            "test__PYT_L_cleaned.trk:md5,6af39bbd85cc396d95c667734c4876e5",
+                            "test__PYT_R_Brainstem_cleaned.trk:md5,f8557a922921c9dcd19a029b523d9c2d",
                             "test__PYT_R_cleaned.trk:md5,50f8127bbaab6f4b9fea790a7c11679d",
-                            "test__SLF_L_cleaned.trk:md5,3660a62ee7e0e413f7417e80c1842e60"
+                            "test__SLF_L_cleaned.trk:md5,189cf493e082cfb4465c72b8e9630bb2",
+                            "test__SLF_R_cleaned.trk:md5,fc4a56c5a2094db9760e4ae41b1ad19d"
                         ]
                     ]
                 ],
+                "bundles_mni": [
+                    
+                ],
                 "versions": [
-                    "versions.yml:md5,5ab498390fc1f2d08a8bd6ed0f1cd4e4",
-                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030"
+                    "versions.yml:md5,94e5ea77581b6f43f79c3e7e4fc03030",
+                    "versions.yml:md5,a18b93eb0edfeaebecfcaf4513b4826c"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.0",
-            "nextflow": "24.10.5"
+            "nextflow": "25.04.6"
         },
-        "timestamp": "2025-03-24T01:06:36.35126247"
+        "timestamp": "2025-07-01T18:04:09.35141368"
     }
 }
